@@ -3,6 +3,5 @@ common build tool(multiple page entry),just the common construct,without MVVM fr
 
 
 # how to start?
-npm install cbt  
 npm install  
 npm run start  
