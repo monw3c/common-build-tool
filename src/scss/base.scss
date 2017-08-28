@@ -1,0 +1,23 @@
+@import "common/_variables";
+@import "common/_reset";
+@import "common/_mixins";
+@import "common/_utilities";
+@import "common/_buttons";
+
+
+.alert{
+	display:none;
+}
+
+.alert1{
+	display:none;
+}
+
+.alert2{
+	display:none;
+	@include border-top-radius($border-radius-base)
+}
+
+body{
+	color:#09c;
+}
