@@ -1,0 +1,11 @@
+.DS_Store
+node_modules
+.git
+.svn
+npm-debug.log
+build
+test
+.sass-cache
+bower_components
+.idea
+tmp
