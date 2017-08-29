@@ -5,13 +5,31 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('css/[name].css');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const vendor = ["./src/js/libs/jquery203.js"];
+
+//获取项目入口js文件
+function getEntry() {
+    var jsPath = path.resolve(__dirname, 'src/js');
+    var dirs = fs.readdirSync(jsPath);
+    var matchs = [],
+        files = {};
+    dirs.forEach(function (item) {
+        matchs = item.match(/(.+)\.js$/);
+        if (matchs) {
+            files[matchs[1]] = path.resolve('src', 'js', item);
+        }
+    });
+    files.vendor = vendor
+    return files;
+}
 
 module.exports = {
-    entry: {
-        index: path.resolve(__dirname, './src/js/index.js'),
-        list: path.resolve(__dirname, './src/js/list.js'),
-        vendor: ["./src/js/libs/jquery203.js"],
-    },
+    // entry: {
+    //     index: path.resolve(__dirname, './src/js/index.js'),
+    //     list: path.resolve(__dirname, './src/js/list.js'),
+    //     vendor: ["./src/js/libs/jquery203.js"],
+    // },
+    entry: getEntry(),
     output: {
         path: path.resolve(__dirname, './build'),
         filename: 'js/[name][hash].js',
@@ -20,20 +38,20 @@ module.exports = {
     devtool: 'source-map',
     module: {
         loaders: [{
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader', //在webpack的module部分的loaders里进行配置即可
-                query: {
-                    presets: ['es2015']
-                }
-            },
-            {
-                test: /\.css$/,
-                use: extractCSS.extract({
-                    fallback: "style-loader",
-                    use: ['css-loader']
-                })
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader', //在webpack的module部分的loaders里进行配置即可
+            query: {
+                presets: ['es2015']
             }
+        },
+        {
+            test: /\.css$/,
+            use: extractCSS.extract({
+                fallback: "style-loader",
+                use: ['css-loader']
+            })
+        }
         ]
     },
     devServer: {
@@ -43,7 +61,7 @@ module.exports = {
     },
     plugins: [
         extractCSS,
-        new webpack.BannerPlugin('QQ:505038730 ! Github:https://github.com/monw3c'),
+        new webpack.BannerPlugin('Github:https://github.com/monw3c'),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: __dirname + "/src/index.tmpl.html",
