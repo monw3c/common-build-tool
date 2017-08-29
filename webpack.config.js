@@ -10,7 +10,7 @@ module.exports = {
     entry: {
         index: path.resolve(__dirname, './src/js/index.js'),
         list: path.resolve(__dirname, './src/js/list.js'),
-        vendor: ["./src/js/libs/jquery203"],
+        vendor: ["./src/js/libs/jquery203.js"],
     },
     output: {
         path: path.resolve(__dirname, './build'),
@@ -36,7 +36,7 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, "./build"),
         compress: true,
-        port: 9000
+        port: 9001
     },
     plugins: [
         extractCSS,
