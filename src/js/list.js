@@ -1,5 +1,7 @@
-require('../css/web.css');
-require('./libs/jquery203.js');
+//require('../css/web.css');
+//require('./libs/jquery203.js');
+import '../css/web.css';
+import $ from './libs/jquery203.js';
 const welcomeMessage = 'ES2015 is awesome';
 const content = `kill, ${welcomeMessage}`;
 let container = $('#container');

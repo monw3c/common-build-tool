@@ -4,7 +4,7 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('css/[name].css');
-
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -17,7 +17,7 @@ module.exports = {
         filename: 'js/[name][hash].js',
         chunkFilename: 'js/[chunkhash:8].chunk.js'
     },
-    devtool: 'eval-source-map',
+    devtool: 'source-map',
     module: {
         loaders: [{
                 test: /\.js$/,
@@ -29,7 +29,10 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: extractCSS.extract(['css-loader'])
+                use: extractCSS.extract({
+                    fallback: "style-loader",
+                    use: ['css-loader']
+                })
             }
         ]
     },
@@ -45,7 +48,11 @@ module.exports = {
             filename: 'index.html',
             template: __dirname + "/src/index.tmpl.html",
             thunks: ['common', 'index'],
-            excludeChunks: ['list']
+            excludeChunks: ['list'],
+            minify: { //压缩HTML文件
+                removeComments: true, //移除HTML中的注释
+                collapseWhitespace: true //删除空白符与换行符
+            }
         }),
         new HtmlWebpackPlugin({
             filename: 'list.html',
@@ -60,6 +67,11 @@ module.exports = {
             name: "vendor",
             minChunks: Infinity,
             filename: "js/common.js",
-        })
+        }),
+        new CleanWebpackPlugin(['build'], {
+            root: '',
+            verbose: true,
+            dry: false
+        }),
     ],
 };

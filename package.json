@@ -1,36 +1,37 @@
 {
-    "name": "cbt",
-    "version": "0.1.1",
-    "description": "common build tool(multiple page entry),just the common construct,without MVVM framework",
-    "main": "",
-    "scripts": {
-        "start": "webpack --progress",
-        "dev": "webpack-dev-server --inline --hot --color",
-        "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress"
-    },
-    "bin": {
-        "cbt init": "./bin/cbt.js"
-    },
-    "author": "mon",
-    "license": "ISC",
-    "devDependencies": {
-        "autoprefixer": "^7.1.2",
-        "babel-core": "^6.26.0",
-        "babel-loader": "^7.1.2",
-        "babel-preset-es2015": "^6.24.1",
-        "css-loader": "^0.28.5",
-        "extract-text-webpack-plugin": "^3.0.0",
-        "html-webpack-plugin": "^2.30.1",
-        "postcss-loader": "^2.0.6",
-        "scss-loader": "^0.0.1",
-        "style-loader": "^0.18.2",
-        "webpack": "^3.5.5",
-        "webpack-dev-server": "^2.7.1"
-    },
-    "dependencies": {},
-    "babel": {
-        "presets": [
-            "es2015"
-        ]
-    }
+  "name": "cbt",
+  "version": "0.1.1",
+  "description": "common build tool(multiple page entry),just the common construct,without MVVM framework",
+  "main": "",
+  "scripts": {
+    "start": "webpack --progress",
+    "dev": "webpack-dev-server --inline --hot --color",
+    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress"
+  },
+  "bin": {
+    "cbt init": "./bin/cbt.js"
+  },
+  "author": "mon",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^7.1.2",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.16",
+    "css-loader": "^0.28.5",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "html-webpack-plugin": "^2.30.1",
+    "postcss-loader": "^2.0.6",
+    "scss-loader": "^0.0.1",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.5.5",
+    "webpack-dev-server": "^2.7.1"
+  },
+  "dependencies": {},
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
 }
