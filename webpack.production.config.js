@@ -40,7 +40,7 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel-loader', //在webpack的module部分的loaders里进行配置即可
+            loader: 'babel-loader', 
             query: {
                 presets: ['es2015']
             }
@@ -49,7 +49,12 @@ module.exports = {
             test: /\.css$/,
             use: extractCSS.extract({
                 fallback: "style-loader",
-                use: ['css-loader']
+                use: [{
+                    loader: 'css-loader',
+                    options: {
+                        minimize: true 
+                    }
+                }]
             })
         }
         ]
