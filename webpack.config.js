@@ -40,7 +40,7 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel-loader', 
+            loader: 'babel-loader',
             query: {
                 presets: ['es2015']
             }
@@ -52,7 +52,7 @@ module.exports = {
                 use: [{
                     loader: 'css-loader',
                     options: {
-                        minimize: true 
+                        minimize: true
                     }
                 }]
             })
@@ -63,6 +63,13 @@ module.exports = {
         contentBase: path.join(__dirname, "./build"),
         compress: true,
         port: 9001
+    },
+    resolve: {
+        extensions: ['.js','.scss','.ts'],
+        modules: ['node_modules'],
+        alias: {
+            jquery: './libs/jquery203.js'
+        }
     },
     plugins: [
         extractCSS,
@@ -86,6 +93,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(), //热加载插件
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
             minChunks: Infinity,

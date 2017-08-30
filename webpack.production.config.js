@@ -64,6 +64,15 @@ module.exports = {
     //     compress: true,
     //     port: 9001
     // },
+    resolve: {
+        extensions: ['.js','.scss','.ts'],
+        modules: ['node_modules']
+    },
+    resolve: {
+        alias: {
+            jquery: './libs/jquery203.js'
+        }
+    },
     plugins: [
         extractCSS,
         new webpack.BannerPlugin('Github:https://github.com/monw3c'),
