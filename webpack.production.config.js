@@ -66,9 +66,7 @@ module.exports = {
     // },
     resolve: {
         extensions: ['.js','.scss','.ts'],
-        modules: ['node_modules']
-    },
-    resolve: {
+        modules: ['node_modules'],
         alias: {
             jquery: './libs/jquery203.js'
         }
