@@ -40,7 +40,7 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel-loader', 
+            loader: 'babel-loader?cacheDirectory=true', 
             query: {
                 presets: ['es2015']
             }

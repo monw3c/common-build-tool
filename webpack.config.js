@@ -3,9 +3,9 @@ const fs = require('fs');
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const extractCSS = new ExtractTextPlugin('css/[name].css');
+const extractCSS = new ExtractTextPlugin('css/[name][contenthash].css');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const vendor = ["./src/js/libs/jquery203.js"];
+const vendor = [path.resolve(__dirname,"./src/js/libs/jquery203.js")];
 
 //获取项目入口js文件
 function getEntry() {
@@ -68,7 +68,7 @@ module.exports = {
         extensions: ['.js','.scss','.ts'],
         modules: ['node_modules'],
         alias: {
-            jquery: './libs/jquery203.js'
+            jquery: path.resolve(__dirname,'./src/js/libs/jquery203.js')
         }
     },
     plugins: [

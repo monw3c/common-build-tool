@@ -28,7 +28,9 @@
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
   },
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.16.2"
+  },
   "babel": {
     "presets": [
       "es2015"
