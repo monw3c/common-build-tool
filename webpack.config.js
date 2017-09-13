@@ -19,7 +19,7 @@ function getEntry() {
             files[matchs[1]] = path.resolve('src', 'js', item);
         }
     });
-    files.vendor = vendor
+    //files.vendor = vendor
     return files;
 }
 
@@ -56,7 +56,35 @@ module.exports = {
                     }
                 }]
             })
-        }
+        },
+        {
+            // 图片加载器，雷同file-loader，更适合图片，可以将较小的图片转成base64，减少http请求
+            // 如下配置，将小于8192byte的图片转成base64码
+            test: /\.(png|jpg|gif)$/,
+            include: path.resolve(__dirname, './src/imgs'),
+            // loader: 'url-loader?limit=8192&name=./static/img/[hash].[ext]',
+            loader: 'url-loader',
+            options: {
+                limit: 8192,
+                name: './imgs/[hash].[ext]',
+            }
+        },
+        {
+            // 专供iconfont方案使用的，后面会带一串时间戳，需要特别匹配到
+            test: /\.(woff|woff2|svg|eot|ttf)\??.*$/,
+            include: path.resolve(__dirname, './src/fonts'),
+            // exclude: /glyphicons/,
+            // loader: 'file-loader?name=static/fonts/[name].[ext]',
+            loader: 'file-loader',
+            options: {
+                name: './fonts/[name].[hash].[ext]',
+            }
+        },
+        // {
+        //     test: /\.ejs$/,
+        //     include: path.resolve(__dirname, './src/ejs'),
+        //     loader: 'ejs-loader',
+        // },
         ]
     },
     devServer: {
@@ -96,7 +124,7 @@ module.exports = {
         new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: "vendor",
-            minChunks: Infinity,
+            minChunks: 4,
             filename: "js/common.js",
         }),
         new CleanWebpackPlugin(['build'], {
