@@ -4,9 +4,9 @@
   "description": "common build tool(multiple page entry),just the common construct,without MVVM framework",
   "main": "",
   "scripts": {
-    "start": "webpack --progress",
-    "dev": "webpack-dev-server --inline --hot --color",
-    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js"
+    "test": "webpack --progress --colors --config webpack.dev.config.js",
+    "dev": "webpack-dev-server --config webpack.dev.config.js --open --hot",
+    "build": "webpack --config ./webpack.prod.config.js"
   },
   "bin": {
     "cbt init": "./bin/cbt.js"

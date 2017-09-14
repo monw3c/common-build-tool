@@ -7,6 +7,13 @@ const extractCSS = new ExtractTextPlugin('css/[name][contenthash].css');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const vendor = [path.resolve(__dirname,"./src/js/libs/jquery203.js")];
 
+// 源代码的根目录（本地物理文件路径）
+const SRC_PATH = path.resolve('./src');
+// 打包后的资源根目录（本地物理文件路径）
+const BUILD_PATH = path.resolve('./build');
+// 资源根目录（可以是 CDN 上的绝对路径，或相对路径）
+const ASSETS_PATH = '/assets/';
+
 //获取项目入口js文件
 function getEntry() {
     var jsPath = path.resolve(__dirname, 'src/js');
@@ -35,9 +42,15 @@ module.exports = {
         filename: 'js/[name][hash].js',
         chunkFilename: 'js/[chunkhash:8].chunk.js'
     },
-    devtool: 'source-map',
     module: {
-        loaders: [{
+        loaders: [
+        // {
+        //     enforce: 'pre',
+        //     test: /\.js?$/,
+        //     exclude: /node_modules/,
+        //     loader: 'eslint-loader'
+        // },
+        {
             test: /\.js$/,
             exclude: /node_modules/,
             loader: 'babel-loader',
@@ -87,11 +100,7 @@ module.exports = {
         // },
         ]
     },
-    devServer: {
-        contentBase: path.join(__dirname, "./build"),
-        compress: true,
-        port: 9001
-    },
+    
     resolve: {
         extensions: ['.js','.scss','.ts'],
         modules: ['node_modules'],
@@ -101,36 +110,29 @@ module.exports = {
     },
     plugins: [
         extractCSS,
-        new webpack.BannerPlugin('Github:https://github.com/monw3c'),
+        new CleanWebpackPlugin([BUILD_PATH], {
+            root: '',
+            verbose: true,
+            dry: false
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "common",
+            minChunks: 4
+            //filename: "js/common.js",
+        }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: __dirname + "/src/index.tmpl.html",
             thunks: ['common', 'index'],
-            excludeChunks: ['list'],
-            minify: { //压缩HTML文件
-                removeComments: true, //移除HTML中的注释
-                collapseWhitespace: true //删除空白符与换行符
-            }
+            excludeChunks: ['list']
         }),
         new HtmlWebpackPlugin({
             filename: 'list.html',
             template: __dirname + "/src/list.tmpl.html",
             thunks: ['common', 'list'],
             excludeChunks: ['index']
-        }),
-        new webpack.HotModuleReplacementPlugin(), //热加载插件
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
-        new webpack.optimize.ModuleConcatenationPlugin(),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: "vendor",
-            minChunks: 4,
-            filename: "js/common.js",
-        }),
-        new CleanWebpackPlugin(['build'], {
-            root: '',
-            verbose: true,
-            dry: false
-        }),
+        })
     ],
 };
+
+
