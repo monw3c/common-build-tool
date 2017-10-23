@@ -1,16 +1,27 @@
-const path = require('path');
+//const path = require('path');
 const webpack = require('webpack');
 const config = require('./webpack.base.config');
 
 config.devServer = {
-        contentBase: './build',
-        host: 'localhost',
-        port: 9001,
-        inline: true, // 可以监控js变化
+    contentBase: './build',
+    host: 'localhost',
+    port: 9001,
+    inline: true, // 可以监控js变化
 		hot: true, // 热启动
 		compress: true,
-		watchContentBase: false,
+		watchContentBase: false
+    // proxy: {
+    //  '/test/*': {
+    //    target: 'http://localhost',
+    //    changeOrigin: true,
+    //    secure: false
+    //  }
+    // }
 }
+
+config.plugins.push(
+        new webpack.HotModuleReplacementPlugin() //热加载插件
+)
 
 config.module.loaders.push(
   {

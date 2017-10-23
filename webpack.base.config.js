@@ -4,7 +4,8 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('css/[name][contenthash].css');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+//const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const vendor = [path.resolve(__dirname,"./src/js/libs/jquery203.js")];
 
 // 源代码的根目录（本地物理文件路径）
@@ -26,7 +27,7 @@ function getEntry() {
             files[matchs[1]] = path.resolve('src', 'js', item);
         }
     });
-    //files.vendor = vendor
+    files['babel-polyfill'] = ['babel-polyfill'];
     return files;
 }
 
@@ -62,11 +63,14 @@ module.exports = {
             test: /\.css$/,
             use: extractCSS.extract({
                 fallback: "style-loader",
+                publicPath: "../../",
                 use: [{
                     loader: 'css-loader',
                     options: {
                         minimize: true
                     }
+                },{
+                    loader: 'postcss-loader'
                 }]
             })
         },
@@ -78,8 +82,8 @@ module.exports = {
             // loader: 'url-loader?limit=8192&name=./static/img/[hash].[ext]',
             loader: 'url-loader',
             options: {
-                limit: 8192,
-                name: './imgs/[hash].[ext]',
+                limit: 10240,
+                name: 'imgs/[hash].[ext]',
             }
         },
         {
@@ -105,19 +109,17 @@ module.exports = {
         extensions: ['.js','.scss','.ts'],
         modules: ['node_modules'],
         alias: {
-            jquery: path.resolve(__dirname,'./src/js/libs/jquery203.js')
+            jquery: path.resolve(__dirname,'./src/js/libs/jquery203.js'),
+            methods: path.resolve(__dirname,'./src/js/libs/methods.js'),
+            fastclick: path.resolve(__dirname,'./src/js/libs/fastclick.js'),
+            vconsole: path.resolve(__dirname,'./src/js/libs/vconsole.js')
         }
     },
     plugins: [
         extractCSS,
-        new CleanWebpackPlugin([BUILD_PATH], {
-            root: '',
-            verbose: true,
-            dry: false
-        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: "common",
-            minChunks: 4
+            minChunks: 2
             //filename: "js/common.js",
         }),
         new HtmlWebpackPlugin({
@@ -131,7 +133,11 @@ module.exports = {
             template: __dirname + "/src/list.tmpl.html",
             thunks: ['common', 'list'],
             excludeChunks: ['index']
-        })
+        }),
+        new CopyWebpackPlugin([
+            // {output}/file.txt
+            { from: `./src/imgs`,to:`imgs`}
+        ])
     ],
 };
 
