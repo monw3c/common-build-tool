@@ -9,7 +9,7 @@
     "build": "webpack --config ./webpack.prod.config.js"
   },
   "bin": {
-    "cbt init": "./bin/cbt.js"
+    "cbt": "./bin/cbt.js"
   },
   "author": "mon",
   "license": "ISC",

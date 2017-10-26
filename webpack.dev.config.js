@@ -1,6 +1,7 @@
 //const path = require('path');
 const webpack = require('webpack');
 const config = require('./webpack.base.config');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 config.devServer = {
     contentBase: './build',
@@ -20,6 +21,7 @@ config.devServer = {
 }
 
 config.plugins.push(
+        new BundleAnalyzerPlugin(),
         new webpack.HotModuleReplacementPlugin() //热加载插件
 )
 

@@ -16,7 +16,22 @@ config.plugins.push(
             dry: false
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+          uglifyOptions: {
+            ie8: false,
+            output: {
+              comments: false,
+              beautify: false,
+            },
+            mangle: {
+              keep_fnames: true
+            },
+            compress: {
+              warnings: false,
+              drop_console: true
+            },
+          }
+        }),
         new webpack.optimize.ModuleConcatenationPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',

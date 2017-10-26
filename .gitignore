@@ -9,3 +9,4 @@ test
 bower_components
 tmp
 .vscode
+src/css/index.css

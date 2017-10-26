@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('css/[name][contenthash].css');
 //const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const vendor = [path.resolve(__dirname,"./src/js/libs/jquery203.js")];
+const vendor = [path.resolve(__dirname,"./src/js/libs/jquery203.js"),path.resolve(__dirname,"./src/js/libs/methods.js"),path.resolve(__dirname,"./src/js/libs/fastclick.js")];
 
 // 源代码的根目录（本地物理文件路径）
 const SRC_PATH = path.resolve('./src');
@@ -28,6 +28,7 @@ function getEntry() {
         }
     });
     files['babel-polyfill'] = ['babel-polyfill'];
+    files['vendor'] = vendor;
     return files;
 }
 
@@ -118,10 +119,17 @@ module.exports = {
     plugins: [
         extractCSS,
         new webpack.optimize.CommonsChunkPlugin({
-            name: "common",
-            minChunks: 2
+            name: ["vendor","runtime"],
+            minChunks: Infinity
             //filename: "js/common.js",
         }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     children: true,
+        //     // (异步加载)
+        //     async: true,
+        //     minChunks: 3,
+        //     //filename: "commons.[chunkhash:4].js",
+        // }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: __dirname + "/src/index.tmpl.html",

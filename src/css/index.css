@@ -1,3 +1,6 @@
 body{
     background: url('../imgs/btn-del.png') no-repeat center center;
 }
+a {
+    display: flex;
+}
