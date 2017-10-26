@@ -27,7 +27,7 @@ function getEntry() {
             files[matchs[1]] = path.resolve('src', 'js', item);
         }
     });
-    files['babel-polyfill'] = ['babel-polyfill'];
+    //files['babel-polyfill'] = ['babel-polyfill'];
     files['vendor'] = vendor;
     return files;
 }
@@ -57,7 +57,11 @@ module.exports = {
             exclude: /node_modules/,
             loader: 'babel-loader',
             query: {
-                presets: ['es2015']
+                presets: ['es2015'],
+                plugins: [
+                    ["transform-object-rest-spread"],
+                    ["transform-runtime"]
+                ]
             }
         },
         {
@@ -125,7 +129,6 @@ module.exports = {
         }),
         // new webpack.optimize.CommonsChunkPlugin({
         //     children: true,
-        //     // (异步加载)
         //     async: true,
         //     minChunks: 3,
         //     //filename: "commons.[chunkhash:4].js",
