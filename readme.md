@@ -5,7 +5,8 @@ common build tool(multiple page entry),just the common construct,without MVVM fr
 
 # 为什么要做这个？
 现在各种框架好用又方便，为什么还要做这个玩意？！  
-在项目中，碰到有些时候真的不需要用到框架，用最轻快结构（还是因为懒）反而更好不是吗~
+在项目中，碰到有些时候真的不需要用到框架，用最轻快结构（还是因为懒）反而更好不是吗~  
+跨域问题我本身喜欢用nginx，当然你也可以dev-server里proxytable，just u like:)
 
 
 # 如何启动
@@ -13,5 +14,4 @@ git clone https://github.com/monw3c/common-build-tool.git
 cd common-build-tool  
 npm install（npm webpack g -i）  
 npm run dev
-npm run build(需根据自己项目配置)
-跨域问题我本身喜欢用nginx，当然你也可以dev-server里proxytable，just u like:)
+npm run build(需根据自己项目配置)  
