@@ -12,5 +12,6 @@ common build tool(multiple page entry),just the common construct,without MVVM fr
 git clone https://github.com/monw3c/common-build-tool.git  
 cd common-build-tool  
 npm install（npm webpack g -i）  
-npm run dev  
+npm run dev
 npm run build(需根据自己项目配置)
+跨域问题我本身喜欢用nginx，当然你也可以dev-server里proxytable，just u like:)
