@@ -1,0 +1,33 @@
+{
+    "list": {
+       "list": [
+            {
+                "title": "巴拉巴拉1",
+                "description": "So Cool",
+                "event": "Saturday, April 9, 2016, 12 - 1pm",
+                "tags": "cool"
+            },
+            {
+                "title": "巴拉巴拉2",
+                "description": "So Awesome",
+                "event": "Sunday, April 10, 2016, 12 - 1pm",
+                "tags": "awesome"
+            }
+        ],
+       "msg":"请求成功",
+       "success":true
+    },
+    "detail":{
+        "result": [
+            {
+                "title": "巴拉巴拉1",
+                "description": "So Cool",
+                "event": "Saturday, April 9, 2016, 12 - 1pm",
+                "tags": "cool",
+                "content":"巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉巴拉"
+            }
+        ],
+       "msg":"请求成功",
+       "success":true
+    }
+}
