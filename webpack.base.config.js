@@ -88,7 +88,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
                 limit: 10240,
-                name: 'imgs/[hash].[ext]',
+                name: 'imgs/[hash].[ext]'
             }
         },
         {
@@ -102,6 +102,10 @@ module.exports = {
                 name: './fonts/[name].[hash].[ext]',
             }
         },
+        {
+            test: /\.(htm|html)$/i,
+            use:[ 'html-withimg-loader'] 
+        }
         // {
         //     test: /\.ejs$/,
         //     include: path.resolve(__dirname, './src/ejs'),
@@ -136,19 +140,19 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: __dirname + "/src/index.tmpl.html",
-            thunks: ['common', 'index'],
+            thunks: ['vendor', 'index'],
             excludeChunks: ['list']
         }),
         new HtmlWebpackPlugin({
             filename: 'list.html',
             template: __dirname + "/src/list.tmpl.html",
-            thunks: ['common', 'list'],
+            thunks: ['vendor', 'list'],
             excludeChunks: ['index']
         }),
-        new CopyWebpackPlugin([
-            // {output}/file.txt
-            { from: `./src/imgs`,to:`imgs`}
-        ])
+        // new CopyWebpackPlugin([
+        //     // {output}/file.txt
+        //     { from: `./src/imgs`,to:`imgs`}
+        // ])
     ],
 };
 
