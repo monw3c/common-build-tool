@@ -1,14 +1,21 @@
+const path = require('path');
 const webpack = require("webpack");
 const config = require('./webpack.base.config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 //const path = require('path');
 //const ExtractTextPlugin = require('extract-text-webpack-plugin');
 //const extractCSS = new ExtractTextPlugin('css/[name][contenthash].css');
+const glob = require('glob');
+const PurifyCSSPlugin = require('purifycss-webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 //const vendor = [path.resolve(__dirname,"./src/js/libs/jquery203.js")];
 
 config.plugins.push(
-        new webpack.BannerPlugin('Github:https://github.com/monw3c'),
+        new PurifyCSSPlugin({
+            paths: glob.sync(path.join(__dirname, 'src/*.html')),
+            minimize:true
+        }),
+        //new webpack.BannerPlugin('Github:https://github.com/monw3c'),
         //new webpack.HotModuleReplacementPlugin(), //热加载插件
         new CleanWebpackPlugin(['./build'], {
             root: '',

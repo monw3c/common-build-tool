@@ -42,7 +42,9 @@
     "webpack": "^3.5.5",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dashboard": "^1.0.0",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-server": "^2.7.1",
+    "purify-css": "^1.2.5",
+    "purifycss-webpack": "^0.7.0"
   },
   "dependencies": {
     "axios": "^0.16.2",

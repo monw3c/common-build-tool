@@ -7,7 +7,6 @@ const extractCSS = new ExtractTextPlugin('css/[name][contenthash].css');
 //const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const vendor = [path.resolve(__dirname,"./src/js/libs/jquery203.js"),path.resolve(__dirname,"./src/js/libs/methods.js"),path.resolve(__dirname,"./src/js/libs/fastclick.js")];
-
 // 源代码的根目录（本地物理文件路径）
 const SRC_PATH = path.resolve('./src');
 // 打包后的资源根目录（本地物理文件路径）
@@ -72,7 +71,7 @@ module.exports = {
                 use: [{
                     loader: 'css-loader',
                     options: {
-                        minimize: true
+                        //minimize: true
                     }
                 },{
                     loader: 'postcss-loader'
@@ -88,7 +87,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
                 limit: 10240,
-                name: 'imgs/[hash].[ext]'
+                name: 'imgs/[hash].[ext]',
             }
         },
         {
@@ -102,10 +101,6 @@ module.exports = {
                 name: './fonts/[name].[hash].[ext]',
             }
         },
-        {
-            test: /\.(htm|html)$/i,
-            use:[ 'html-withimg-loader'] 
-        }
         // {
         //     test: /\.ejs$/,
         //     include: path.resolve(__dirname, './src/ejs'),
@@ -149,10 +144,10 @@ module.exports = {
             thunks: ['vendor', 'list'],
             excludeChunks: ['index']
         }),
-        // new CopyWebpackPlugin([
-        //     // {output}/file.txt
-        //     { from: `./src/imgs`,to:`imgs`}
-        // ])
+        new CopyWebpackPlugin([
+            // {output}/file.txt
+            { from: `./src/imgs`,to:`imgs`}
+        ])
     ],
 };
 

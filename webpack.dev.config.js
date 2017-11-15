@@ -9,10 +9,10 @@ config.devServer = {
     host: 'localhost',
     port: 9001,
     inline: true, // 可以监控js变化
-    hot: true, // 热启动
-    compress: true,
+		hot: true, // 热启动
+		compress: true,
     quiet: true,
-    watchContentBase: false
+		watchContentBase: false
     // proxy: {
     //  '/test/*': {
     //    target: 'http://localhost',
@@ -26,6 +26,7 @@ config.plugins.push(
         new BundleAnalyzerPlugin(),
         new webpack.HotModuleReplacementPlugin(), //热加载插件
         new DashboardPlugin()
+
 )
 
 config.module.loaders.push(
@@ -40,7 +41,7 @@ config.module.loaders.push(
   }
 );
 
-config.devtool='source-map',
+config.devtool='eval-source-map',
 // config.plugins.push(
 //   new webpack.SourceMapDevToolPlugin({
 //     filename: '[file].map',
