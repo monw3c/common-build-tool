@@ -101,6 +101,10 @@ module.exports = {
                 name: './fonts/[name].[hash].[ext]',
             }
         },
+        {
+            test: /\.(htm|html)$/i,
+            use:[ 'html-withimg-loader'] 
+        }
         // {
         //     test: /\.ejs$/,
         //     include: path.resolve(__dirname, './src/ejs'),
@@ -144,10 +148,13 @@ module.exports = {
             thunks: ['vendor', 'list'],
             excludeChunks: ['index']
         }),
-        new CopyWebpackPlugin([
-            // {output}/file.txt
-            { from: `./src/imgs`,to:`imgs`}
-        ])
+        // new CopyWebpackPlugin([
+        //     // {output}/file.txt
+        //     { from: `./src/imgs`,to:`imgs`}
+        // ]),
+         new webpack.ProvidePlugin({
+            $:"jquery"
+        })
     ],
 };
 

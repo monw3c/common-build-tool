@@ -36,15 +36,15 @@
     "lodash": "^4.17.4",
     "mockjs": "^1.0.1-beta3",
     "postcss-loader": "^2.0.6",
+    "purify-css": "^1.2.5",
+    "purifycss-webpack": "^0.7.0",
     "scss-loader": "^0.0.1",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
     "webpack": "^3.5.5",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dashboard": "^1.0.0",
-    "webpack-dev-server": "^2.7.1",
-    "purify-css": "^1.2.5",
-    "purifycss-webpack": "^0.7.0"
+    "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
     "axios": "^0.16.2",
